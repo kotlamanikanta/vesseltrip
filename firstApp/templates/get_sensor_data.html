@@ -1,0 +1,27 @@
+<html>
+<head>
+    <title> trip for "Sensor X" over time</title> 
+</head>    
+<body>
+    <h1> From a given trip, give me all the data for "Sensor X" over time</h1>
+      
+    <table border="1">
+        <tr>
+            <th> sensorName</th>
+            <th> dataPoints</th>
+            <th> dateTime</th>
+            <th> tripId</th>
+        </tr>
+        {% for s in data %}
+            <tr>
+                <td>{{s.sensorName}}</td>
+                <td>{{s.dataPoints}}</td>
+                <td>{{s.dateTime}}</td>
+                <td>{{s.tripId}}</td>                 
+            </tr>
+      
+        {% endfor %}
+    </table><br>
+    <button type="button"><a href="{{request.path}}?export=True">Click Me!</a></button>     
+</body>    
+</html>

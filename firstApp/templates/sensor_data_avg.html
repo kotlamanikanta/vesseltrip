@@ -1,0 +1,27 @@
+<html>
+<head>
+    <title>trip average of "Sensor X" throughout the entire trip</title> 
+</head>
+<body>
+    <h1>From a given trip, give the average of "Sensor X" throughout the entire trip</h1>
+      
+    <table border="1">
+        <tr>
+            
+            <th> index0_avg</th>     
+            <th> index1_avg</th>
+            <th> index2_avg</th>
+        </tr>
+        {% for s in k %}
+
+            <tr>
+                <td>{{s.index0_avg}}</td>
+                <td>{{s.index1_avg}}</td>
+                <td>{{s.index2_avg}}</td>                 
+            </tr>
+      
+        {% endfor %}
+    </table><br>
+    <button type="button"><a href="{{request.path}}?export=True">Click Me!</a></button>     
+</body>    
+</html>

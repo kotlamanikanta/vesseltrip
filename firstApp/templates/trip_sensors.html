@@ -1,0 +1,23 @@
+<html>
+<head>
+<title>given trip which sensors were available</title>
+</head>
+<body>
+    <h1>For a given trip, tell me which sensors were available</h1>
+      
+    <table border="1">
+        <tr>
+            <th>sensors</th>
+            
+        </tr>
+        {% for s in trip %}
+            <tr>
+                <td>{{s.sensors}}</td>                   
+            </tr>
+      
+        {% endfor %}
+    </table><br> 
+
+    <button type="button"><a href="{{request.path}}?export=True">Click Me!</a></button>
+</body>    
+</html>

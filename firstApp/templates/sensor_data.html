@@ -1,0 +1,27 @@
+<html>
+<head>
+    <title>trip of "Sensor X" throughout the entire trip</title>
+</head>
+<body>
+    <h1>From a given trip, give the sum of "Sensor X" throughout the entire trip</h1>
+      
+    <table border="1">
+        <tr>
+            
+            <th> index0_sum</th>     
+            <th> index1_sum</th>
+            <th> index2_sum</th>
+        </tr>
+        {% for s in mk %}
+
+            <tr>
+                <td>{{s.index0_sum}}</td>
+                <td>{{s.index1_sum}}</td>
+                <td>{{s.index2_sum}}</td>                 
+            </tr>
+      
+        {% endfor %}
+    </table><br>
+    <button type="button"><a href="{{request.path}}?export=True">Click Me!</a></button>     
+</body>    
+</html>
