@@ -19,6 +19,7 @@ from firstApp.views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('',homepage,name="homepage"),
     path('get_sensor_data/',get_sensor_data,name="get_sensor_data"),
     path('timespan/',timespan,name="timespan"),
     path('sensor_data/',sensor_data,name="sensor_data"),
