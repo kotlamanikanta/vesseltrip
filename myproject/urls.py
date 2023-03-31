@@ -18,12 +18,12 @@ from django.urls import path
 from firstApp.views import *
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('',homepage,name="homepage"),
-    path('get_sensor_data/',get_sensor_data,name="get_sensor_data"),
-    path('timespan/',timespan,name="timespan"),
-    path('sensor_data/',sensor_data,name="sensor_data"),
-    path('sensor_data_avg/',sensor_data_avg,name="sensor_data_avg"),
-    path('boatsensor_data_avg/',boatsensor_data_avg,name="boatsensor_data_avg"),
-    path('trip_sensors/',trip_sensors,name="trip_sensors"),
+    path("admin/", admin.site.urls),
+    path("", homepage, name="homepage"),
+    path("get_sensor_data/", get_sensor_data, name="get_sensor_data"),
+    path("timespan/", timespan, name="timespan"),
+    path("sensor_data/", sensor_data, name="sensor_data"),
+    path("sensor_data_avg/", sensor_data_avg, name="sensor_data_avg"),
+    path("boatsensor_data_avg/", boatsensor_data_avg, name="boatsensor_data_avg"),
+    path("trip_sensors/", trip_sensors, name="trip_sensors"),
 ]

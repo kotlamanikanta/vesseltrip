@@ -7,6 +7,9 @@ from bson.objectid import ObjectId
 import csv
 from django.http import HttpResponse
 
+from django.http import JsonResponse
+
+
 connection = MongoClient()
 db = connection.querydata
 # Create your views here.
@@ -63,7 +66,7 @@ def timespan(request):
     # print(sensor_data)
     d = list(sensor_data)
     # print("hi")
-    print(d, "hi")
+    # print(d, "hi")
     if request.GET.get("export", None) == "True":
         r = some_view(d)
         return r
@@ -189,7 +192,7 @@ def trip_sensors(request):
     )
     # print(trip_sensors_data)
     f = list(trip_sensors_data)
-    print(f)
+    # print(f)
     if request.GET.get("export", None) == "True":
         r = some_view(f)
         return r

@@ -1,12 +1,21 @@
 <html>
 <head>
     <title>trip of "Sensor X" throughout the entire trip</title>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.css" />
+  
+    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <script>
+    $(document).ready( function () {
+        $('#myTable').DataTable();
+    } );
+    </script>
+    
+
 </head>
 <body>
-    <h1>From a given trip, give the sum of "Sensor X" throughout the entire trip</h1>
-    
-      
-    <table border="1">
+    <h1>From a given trip, give the sum of "Sensor X" throughout the entire trip</h1> 
+    <table id="myTable" border="1">
         <tr>
             
             <th> index0_sum</th>     

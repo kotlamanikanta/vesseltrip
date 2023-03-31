@@ -4,10 +4,33 @@
 </head>
 <body>
     <h1>For a given trip, tell me which sensors were available</h1>
+    <div class="wrappers">
+        <select id="sensor">
+          <option value="-1">select sensor</option>
+          <option value="GPS">sensorName</option>
+          <option value="1">dataPoints</option>
+          <option value="1">dateTime</option>
+        </select>
+    </div>
+    <script>
+        const sensorDropdown = document.querySelector('#sensor');
+        sensorDropdown.addEventListener('change', (event) => {
+        const selectedValue = event.target.value;
+        if (selectedValue === '-1') {
+        console.log('No sensor selected.');
+        } else {
+        console.log(`Selected sensor: ${selectedValue}`);
+    // You can add code here to perform any actions based on the selected sensor value.
+        }
+       });
+       
+
+    </script>
       
-    <table border="1">
+    <table border="1"><br/>
         <tr>
             <th>sensors</th>
+            <button type="button"><a href="{{request.path}}?export=True">Click Me!</a></button>
             
         </tr>
         {% for s in trip %}
@@ -16,8 +39,6 @@
             </tr>
       
         {% endfor %}
-    </table><br> 
-
-    <button type="button"><a href="{{request.path}}?export=True">Click Me!</a></button>
+    </table><br>    
 </body>    
 </html>
