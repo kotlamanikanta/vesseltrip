@@ -11,7 +11,7 @@
             <th>index1_avg</th>
             <th>index2_avg</th>
         </tr>
-        {% for s in A %}
+        {% for s in boatsensor_sum_data %}
             <tr>
                 <td>{{s.index0_avg}}</td>
                 <td>{{s.index1_avg}}</td>
@@ -20,7 +20,8 @@
             </tr>
       
         {% endfor %}
-    </table><br>
+    </table>
     <button type="button"><a href="{{request.path}}?export=True">Click Me!</a></button>    
 </body>    
 </html>
+

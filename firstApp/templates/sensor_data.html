@@ -1,13 +1,17 @@
 <html>
 <head>
     <title>trip of "Sensor X" throughout the entire trip</title>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.css" />
   
     <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script> -->
+
+    <!-- <link rel='stylesheet' type='text/css' href='https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css'> -->
     <script>
+    
     $(document).ready( function () {
-        $('#myTable').DataTable();
+        $('#myTable').dataTable();
     } );
     </script>
     
@@ -16,22 +20,28 @@
 <body>
     <h1>From a given trip, give the sum of "Sensor X" throughout the entire trip</h1> 
     <table id="myTable" border="1">
-        <tr>
+        
+        <thead>
+            <tr>
             
-            <th> index0_sum</th>     
-            <th> index1_sum</th>
-            <th> index2_sum</th>
-        </tr>
-        {% for s in mk %}
+                <th> index0_sum</th>     
+                <th> index1_sum</th>
+                <th> index2_sum</th>
+            </tr>
+        </thead>
+        <tbody>
 
+            {% for s in sum_data %}
             <tr>
                 <td>{{s.index0_sum}}</td>
                 <td>{{s.index1_sum}}</td>
                 <td>{{s.index2_sum}}</td>                 
             </tr>
-      
+        
         {% endfor %}
-    </table><br>
+        </tbody>
+        
+    </table>
     <button type="button"><a href="{{request.path}}?export=True">Click Me!</a></button> 
       
 </body>  

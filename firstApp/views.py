@@ -8,6 +8,7 @@ import csv
 from django.http import HttpResponse
 
 from django.http import JsonResponse
+import pymongo
 
 
 connection = MongoClient()
@@ -20,30 +21,32 @@ def homepage(request):
 
 
 def get_sensor_data(request):
+    if request.method == "GET":
 
-    trip_id = "63d4228e01afc1d6b6813e38"
-    sensor_name = "GPS"
-    from_time = datetime.now() - timedelta(days=90)
-    to_time = datetime.now()
-    sensor_data = db.vesseltripdata.aggregate(
-        [
-            {
-                "$match": {
-                    "dateTime": {"$gte": from_time, "$lte": to_time},
-                    "tripId": trip_id,
-                    "sensorName": sensor_name,
-                }
-            },
-            {"$project": {"_id": 0}},
-        ]
-    )
-    data = list(sensor_data)
-    # print(data,"abcd")
-    # this function used to convert the html display data to csv formate
-    if request.GET.get("export", None) == "True":
-        r = some_view(data)
-        return r
-    return render(request, "get_sensor_data.html", {"data": data})
+        trip_id = "63d4228e01afc1d6b6813e38"
+        sensor_name = request.GET.get("sensorName")
+        from_time = datetime.now() - timedelta(days=90)
+        to_time = datetime.now()
+        sensor_data = db.vesseltripdata.aggregate(
+            [
+                {
+                    "$match": {
+                        "dateTime": {"$gte": from_time, "$lte": to_time},
+                        "tripId": trip_id,
+                        "sensorName": sensor_name,
+                    }
+                },
+                {"$project": {"_id": 0}},
+            ]
+        )
+        data = list(sensor_data)
+        # print(data,"abcd")
+        # this function used to convert the html display data to csv formate
+        if request.GET.get("export", None) == "True":
+            r = some_view(data)
+            return r
+        return render(request, "get_sensor_data.html", {"data": data})
+    return HttpResponse("hi")
 
 
 def timespan(request):
@@ -64,13 +67,13 @@ def timespan(request):
         ]
     )
     # print(sensor_data)
-    d = list(sensor_data)
+    sensor_data = list(sensor_data)
     # print("hi")
     # print(d, "hi")
     if request.GET.get("export", None) == "True":
-        r = some_view(d)
+        r = some_view(sensor_data)
         return r
-    return render(request, "Timedata.html", {"dm": d})
+    return render(request, "Timedata.html", {"sensor_data": sensor_data})
 
 
 # get_sensor_data(sensor_name,from_time,to_time,trip_id)
@@ -96,14 +99,14 @@ def sensor_data(request):
         ]
     )
     # print(sensor_sum_data)
-    d = list(sensor_sum_data)
+    sum_data = list(sensor_sum_data)
     if request.GET.get("export", None) == "True":
-        r = some_view(d)
+        r = some_view(sum_data)
         return r
     # print(type(sensor_sum_data))
     # print(dumps(list(sensor_sum_data)))
     # return HttpResponse("mani")
-    return render(request, "sensor_data.html", {"mk": d})
+    return render(request, "sensor_data.html", {"sum_data": sum_data})
 
 
 # get_sensor_data_sum(sensor_name,trip_id)
@@ -130,13 +133,13 @@ def sensor_data_avg(request):
     )
     # print(sensor_sum_data)
     # print(type(sensor_sum_data))
-    r = list(sensor_sum_data)
+    sensor_data_avg = list(sensor_sum_data)
     if request.GET.get("export", None) == "True":
-        z = some_view(r)
+        z = some_view(sensor_data_avg)
         return z
     # print(dumps(list(sensor_sum_data)))
     # return HttpResponse("mani")
-    return render(request, "sensor_data_avg.html", {"k": r})
+    return render(request, "sensor_data_avg.html", {"sensor_data_avg": sensor_data_avg})
 
 
 # get_sensor_data_avg( sensor_name,trip_id)
@@ -171,15 +174,17 @@ def boatsensor_data_avg(request):
         ]
     )
     # print(boatsensor_sum_data)
-    de = list(boatsensor_sum_data)
+    boatsensor_sum_data = list(boatsensor_sum_data)
     if request.GET.get("export", None) == "True":
-        r = some_view(de)
+        r = some_view(boatsensor_sum_data)
         return r
     # print(de)
     # print(type(boatsensor_sum_data))
     # print(dumps(list(boatsensor_sum_data)))
     # return HttpResponse("Amani")
-    return render(request, "boatsensor_data.html", {"A": de})
+    return render(
+        request, "boatsensor_data.html", {"boatsensor_sum_data": boatsensor_sum_data}
+    )
 
 
 def trip_sensors(request):
@@ -191,13 +196,13 @@ def trip_sensors(request):
         ]
     )
     # print(trip_sensors_data)
-    f = list(trip_sensors_data)
+    trip = list(trip_sensors_data)
     # print(f)
     if request.GET.get("export", None) == "True":
-        r = some_view(f)
+        r = some_view(trip)
         return r
     # return HttpResponse("Anil")
-    return render(request, "trip_sensors.html", {"trip": f})
+    return render(request, "trip_sensors.html", {"trip": trip})
     # print(type(trip_sensors_data))
     # print(dumps(list(trip_sensors_data)))
 

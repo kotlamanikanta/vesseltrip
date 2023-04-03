@@ -4,25 +4,17 @@
 </head>    
 <body>
     <h1> From a given trip, give me all the data for "Sensor X" over time</h1>
-    <div class="wrappers">
-        <select id="sensor">
-          <option value="1">select sensor</option>
-          <option value="1">sensorName</option>
-          <option value="1">dataPoints</option>
-          <option value="1">dateTime</option>
-          <option value="1">tripId</option>
-        </select>
-    </div>
-    <script>
-        
-       const sensor=document.getElementById("sensor");
-       sensor.addEventListener("change",function(){
-       const selectedOption=sensor.options[sensor.selectIndex].value;
-       console.log("select option value",selectedOption);
-       }); 
-
-    </script>
-
+    <div class="myclass">
+        <form action=""method="GET">
+            <select name="sensorName">
+                <option value="sensorname">sensorname</option>
+                <option value="GPS">GPS</option>
+                <option value="GYRO">GYRO</option>
+                <option value="MAG">MAG</option>
+                <option value="AAC">AAC</option>
+                <option value="UACC">UACC</option>
+            </select>
+        </form>
       
     <table border="1"><br/><button type="button"><a href="{{request.path}}?export=True">Click Me!</a></button>
         <tr>

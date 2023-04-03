@@ -1,38 +1,79 @@
 <html>
 <head>
     <title>trip for "Sensor X" over time</title> 
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.css" />
+  
+    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script> -->
+    <!-- <link rel='stylesheet' type='text/css' href='https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css'> -->
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.min.css" integrity="sha256-b88RdwbRJEzRx95nCuuva+hO5ExvXXnpX+78h8DjyOE=" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.min.js" integrity="sha256-/7FLTdzP6CfC1VBAj/rsp3Rinuuu9leMRGd354hvk0k=" crossorigin="anonymous"></script>
+    Start Date: <input type="text" id="my_date_picker">
+   
+    <script>
+          
+            $(function() {
+                $( "#my_date_picker" ).datepicker();
+            });
+        
+    </script>
+     End Date: <input type="text" id="date_picker">
+   
+     <script>
+           
+             $(function() {
+                 $( "#date_picker" ).datepicker();
+             });
+         
+     </script>
+     <!-- table -->
+    <script>
+    
+    $(document).ready( function () {
+        $('#myTable').dataTable();
+    } );
+    </script>
+    
+
 </head>
 <body>
     <h1> From a given timespan, give me all the data for "Sensor X" over time</h1>
-    <div class="wrappers">
-        <select id="sensor">
-          <option value="-1">select sensor</option>
-          <option value="GPS">sensorName</option>
-          <option value="-1">dataPoints</option>
-          <option value="">dateTime</option>
-        </select>
+    <div class="myclass">
+        <form action=""method="GET">
+            <select name="sensorName">
+                <option value="sensorname">sensorname</option>
+                <option value="GPS">GPS</option>
+                <option value="GYRO">GYRO</option>
+                <option value="MAG">MAG</option>
+                <option value="AAC">AAC</option>
+                <option value="UACC">UACC</option>
+            </select>
+        </form>
+        
     </div>
       
-    <table border="1"></br>
-        <tr>
-            <th> sensorName</th>
-            <th> dataPoints</th>
-            <th> dateTime</th>
-            <th> tripId</th>
-        </tr>
-        {% for s in dm %}
+    <table id="myTable" border="1"></br>
+        <thead>
+            <tr>
+                <th> sensorName</th>
+                <th> dataPoints</th>
+                <th> dateTime</th>
+                <th> tripId</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for s in sensor_data %}
             <tr>
                 <td>{{s.sensorName}}</td>
                 <td>{{s.dataPoints}}</td>
                 <td>{{s.dateTime}}</td>
                 <td>{{s.tripId}}</td>                 
             </tr>
-      
         {% endfor %}
+        </tbody>
         <button type="button"><a href="{{request.path}}?export=True">Click Me!</a></button>
-
-
-    </table>
-          
+    </table>          
 </body>    
 </html>

@@ -4,15 +4,14 @@
 </head>
 <body>
     <h1>From a given trip, give the average of "Sensor X" throughout the entire trip</h1>
-      
     <table border="1">
         <tr>
             
             <th> index0_avg</th>     
             <th> index1_avg</th>
-            <th> index2_avg</th>
+          <th> index2_avg</th>
         </tr>
-        {% for s in k %}
+        {% for s in sensor_data_avg %}
 
             <tr>
                 <td>{{s.index0_avg}}</td>
